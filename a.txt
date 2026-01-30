@@ -1,1 +1,22 @@
-This is a text
+node {
+    def gitrepo = 'https://github.com/Ankan619/mavenproject.git'
+    def stages = ['compile', 'test', 'package']
+
+    stage('Git-Clone') {
+        git gitrepo
+    }
+
+    for (i in stages) {
+        stage(i) {
+            if (i == 'compile') {
+                bat 'mvn compile'
+            }
+            if (i == 'test') {
+                bat 'mvn test'
+            }
+            if (i == 'package') {
+                bat 'mvn package'
+            }
+        }
+    }
+}
